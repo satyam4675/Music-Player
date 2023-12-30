@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+        integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Music Player</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="main_div">
+        <div class="music_container">
+            <h2 id="title">Rasgulla</h2>
+            <h3 id="artist">The Playlist</h3>
+            <div class="img_container">
+                <img src="images/Song1.jpg" alt="Rasgulla">
+            </div>
+            <audio src="music/Song1.mp3"></audio>
+
+            <!-- controls -->
+            <div class="music_controls">
+                <i class="fa fa-backward" aria-hidden="true" id="prev" title="Previous"></i>
+                <i class="fa fa-play main_button" aria-hidden="true" id="play" title="Play"></i>
+                <i class="fa fa-forward" aria-hidden="true" id="next" title="Forward"></i>
+            </div>
+        </div>
+    </div>
+    <script>
+        const music = document.querySelector("audio");
+        const img = document.querySelector("img");
+        const play = document.getElementById("play");
+        const artist = document.getElementById("artist");
+        const title = document.getElementById("title");
+        const prev = document.getElementById("prev");
+        const next = document.getElementById("next");
+
+        const songs = [
+            {
+                name: "Song1",
+                title: "Rasgulla",
+                artist: "Vijay Chauhan",
+            },
+            {
+                name: "Song2",
+                title: "Agarbatti",
+                artist: "Shilpi Raj",
+            },
+            {
+                name: "Song3",
+                title: "Dafa 406",
+                artist: "Chhotu Shikari",
+            },
+        ];
+
+
+        let isPlaying = false;
+        // for play
+        const playMusic = () => {
+            isPlaying = true;
+            music.play();
+            play.classList.replace("fa-play", "fa-pause");
+            img.classList.add("anime");
+        };
+
+        // for puse
+        const pauseMusic = () => {
+            isPlaying = false;
+            music.pause();
+            play.classList.replace("fa-pause", "fa-play");
+            img.classList.add("anime");
+        };
+
+        play.addEventListener('click', () => {
+            isPlaying ? pauseMusic() : playMusic();
+        });
+
+        // changing the music data
+
+        const loadSong = () => {
+            title.textContent = songs.title;
+            artist.textContent = songs.artist;
+            music.src = "music/" + songs.name + ".mp3";
+            ims.src = "images/"+songs.name+".jpeg";
+        };
+
+        SongIndex = 0;
+        // loadSong(songs[0]);
+
+        const nextSong =  () => {
+            songIndex = (songIndex + 1) % songs.lenght;
+            loadSong(songs[songIndex]);
+            playMusic();
+        };
+
+        const prevSong =  () => {
+            songIndex = (songIndex - 1 + songs.lenght) % song.lenght;
+            loadSong(songs[songIndex]);
+            playMusic();
+        };
+
+        next.addEventListener("click", nextSong);
+        prev.addEventListener("click", prevSong);
+
+
+    </script>
+</body>
+
+</html>
